@@ -1,0 +1,40 @@
+
+const int sensor_pin = A4;
+
+void setup() {
+    pinMode(D7, OUTPUT);
+    Serial.begin(9600);
+}
+void loop() {
+    
+    int light_sensor = analogRead(A0);
+    
+    float moisture_percentage;
+    int sensor_analog;
+    sensor_analog = analogRead(sensor_pin);
+  
+    moisture_percentage = (100 - ( (sensor_analog/4095.00) * 100 ) );   //shows the moisture in %
+  
+    Particle.publish("Moisture Percentage: ", String(moisture_percentage), 60, PRIVATE);
+    delay(5000);
+    
+    Particle.publish("Analog Read A0 = ", String(light_sensor), 60, PRIVATE);  // shows A0
+    delay(6000);
+
+    if (moisture_percentage < 30 &&  light_sensor <= 2500 ) {
+        
+        Particle.publish("Moisture-level-changed-in-light", "Dry");
+        digitalWrite(D7, 1);
+        delay(10000);
+        
+    }
+    
+    if (moisture_percentage < 30 && light_sensor > 2500) {
+        
+        Particle.publish("Moisture-level-changed-in-dark", "Dry");
+        digitalWrite(D7, 1);
+        delay(10000);
+        
+    }
+
+}
