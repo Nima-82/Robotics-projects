@@ -1,0 +1,112 @@
+#include <Servo.h> 
+
+
+Servo servo1;
+Servo servo2;
+Servo servo3;
+Servo servo4;
+Servo servo5;
+
+
+
+const int flexpin1 = A1; 
+const int flexpin2 = A2; 
+const int flexpin3 = A3; 
+const int flexpin4 = A4; 
+const int flexpin5 = A5; 
+
+
+void setup() 
+{ 
+
+
+  Serial.begin(9600);
+
+
+  servo1.attach(5);
+  servo2.attach(3);
+  servo3.attach(9);
+  servo4.attach(10);
+  servo5.attach(6);
+}
+
+void loop() {
+  
+  int flexposition1;    // Input value from the analog pin.
+  int servoposition1;   // Output value to the servo.
+  
+  int flexposition2;  
+  int servoposition2; 
+  
+  int flexposition3;     
+  int servoposition3;   
+  
+  int flexposition4;    
+  int servoposition4;   
+  
+  int flexposition5;    
+  int servoposition5; 
+  
+  flexposition1 = analogRead(flexpin1);
+  flexposition2 = analogRead(flexpin2);
+  flexposition3 = analogRead(flexpin3);
+  flexposition4 = analogRead(flexpin4);
+  flexposition5 = analogRead(flexpin5);
+  
+  if (flexposition1 < 565) {
+    servo1.write(0);
+  } if (flexposition1 > 566) {
+    servo1.write(180);
+  }
+  
+  if (flexposition2 < 590) {
+    servo2.write(0);
+  } if (flexposition1 > 591) {
+    servo2.write(180);
+  }
+  
+  if (flexposition3 < 601) {
+    servo3.write(0);
+  } if (flexposition1 > 602) {
+    servo3.write(180);
+  }
+  
+  if (flexposition4 < 574) {
+    servo4.write(0);
+  } if (flexposition1 > 684) {
+    servo4.write(180);
+  }
+  
+  if (flexposition5 < 590) {
+    servo5.write(0);
+  } if (flexposition1 > 591) {
+    servo5.write(180);
+  }
+
+  Serial.print("sensor1: ");
+  Serial.print(flexposition1);
+  Serial.print("  servo1: ");
+  Serial.println(servoposition1);
+  
+  Serial.print("sensor2: ");
+  Serial.print(flexposition2);
+  Serial.print("  servo2: ");
+  Serial.println(servoposition2);
+  
+  Serial.print("sensor3: ");
+  Serial.print(flexposition3);
+  Serial.print("  servo3: ");
+  Serial.println(servoposition3);
+  
+  Serial.print("sensor4: ");
+  Serial.print(flexposition4);
+  Serial.print("  servo4: ");
+  Serial.println(servoposition4);
+  
+  Serial.print("sensor5: ");
+  Serial.print(flexposition5);
+  Serial.print("  servo5: ");
+  Serial.println(servoposition5);
+  
+  delay(10);
+}
